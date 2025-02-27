@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamster Combat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+       h1{
+        text-align: center; 
+        color: #FFD700; 
+        position: absolute; 
+        top: 10px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        font-size: 28px; 
+        font-weight: bold; 
+        text-shadow: 2px 2px 5px rgba(255, 215, 0, 0.6), 0px 0px 10px rgba(255, 255, 255, 0.8);
+        background: linear-gradient(to right, #ff8c00, #ffcc00); 
+        -webkit-background-clip: text; 
+        -webkit-text-fill-color: transparent;
+       }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: #333;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+        }
+        .header div {
+            flex-grow: 1;
+            text-align: left;
+            margin-left: 10px;
+        }
+        .header div h2 {
+            margin: 0;
+            font-size: 1rem;
+        }
+        .header div p {
+            margin: 0;
+            font-size: 0.75rem;
+            color: #ff9900;
+        }
+        .info {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .info div {
+            background: #444;
+            border-radius: 5px;
+            padding: 10px;
+            width: 30%;
+            box-sizing: border-box;
+        }
+        .info div p {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .info div p img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+        .info div p:first-child {
+            font-size: 0.75rem;
+            color: #ccc;
+        }
+        .info div p:last-child {
+            font-size: 0.75rem;
+            color: #ff9900;
+        }
+        .score {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .score img {
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
+        }
+        .hamster {
+            width: 70%;
+            height: 70%;
+            border-radius: 50%;
+            background: #021841;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .hamster:active {
+            transform: scale(0.95);
+        }
+        .hamster img {
+            width: 70%;
+            border-radius: 100%;
+        }
+        .level {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+        }
+        .level p {
+            margin: 0;
+            font-size: 0.875rem;
+        }
+        .level .progress-bar {
+            width: 70%;
+            background: #555;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        .level .progress-bar div {
+            background: #00cc00;
+            height: 100%;
+            width: 0;
+            position: absolute;
+            transition: width 0.3s;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            background: rgba(34, 34, 34, 0.9); /* Slight transparency */
+            padding: 10px 15px;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.nav-button {
+    background: #444; /* Dark Gray */
+    border: none;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-button img {
+    width: 24px; /* Icon size */
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+.nav-button:hover {
+    background: #ffb400; /* Golden color on hover */
+    color: black;
+}
+
+
+        
+        @media (max-width: 300px) {
+            .header img {
+                width: 40px;
+                height: 40px;
+            }
+            .header div h2 {
+                font-size: 0.875rem;
+            }
+            .header div p {
+                font-size: 0.625rem;
+            }
+            .info div {
+                width: 28%;
+            }
+            .score {
+                font-size: 1.25rem;
+            }
+            .score img {
+                width: 25px;
+                height: 25px;
+            }
+            .hamster {
+                width: 120px;
+                height: 120px;
+            }
+            .level p {
+                font-size: 0.75rem;
+            }
+
+}
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: white; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); font-size: 25px;">Mr. Sabbir Coin Airdrop</h1>
+
+    <div class="container">
+        <div class="header">
+            <img id="profilePic" src="https://via.placeholder.com/50" alt="User">
+            <div>
+                <h2 id="userName">(CEO)</h2>
+                <p>Sabbir-Tech</p>
+            </div>
+        </div>
+        <br><br><br>
+        <div class="info">
+            <div>
+                <p>Earn per tap</p>
+                <p><img src="2.png" alt="Hamster"> +10</p>
+            </div>
+            <div>
+                <p>Coins to level up</p>
+                <p>1M</p>
+            </div>
+            <div>
+                <p>Profit per hour</p>
+                <p><img src="2.png" alt="Hamster"> +74.5K</p>
+            </div>
+        </div>
+        <br><br>
+        <div class="score" id="score">
+            <img src="2.png" alt="Hamster"> 0
+        </div>
+        <div class="hamster" onclick="addCoins()">
+            <img src="1.png" alt="Hamster">
+        </div>
+        <div class="level">
+            <p>Level <span id="currentLevel">1</span>/10</p>
+            <div class="progress-bar">
+                <div id="progress"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bottom-nav">
+        <button class="nav-button">
+            <img src="mine.png" alt="Mine">
+            Mine
+        </button>
+        <button class="nav-button">
+            <img src="ref.png" alt="Refer">
+            Refer
+        </button>
+        <button class="nav-button">
+            <img src="task.png" alt="Task">
+            Task
+        </button>
+        <button class="nav-button">
+            <img src="air.png" alt="Earn">
+            TGE
+        </button>
+    </div>
+    
+    
+
+    <audio id="clickSound" src="23.mp3"></audio> <!-- Base64 sound data here -->
+
+    <script>
+        let coins = 0;
+        let currentLevel = 1;
+        const coinsToLevelUp = 1000000;
+        const maxLevel = 10;
+
+        function addCoins() {
+            coins += 10;
+            document.getElementById('score').textContent = `$ ${coins.toLocaleString()}`;
+
+            const progressPercent = (coins % coinsToLevelUp) / coinsToLevelUp * 100;
+            document.getElementById('progress').style.width = progressPercent + '%';
+
+            if (coins >= coinsToLevelUp * currentLevel && currentLevel < maxLevel) {
+                currentLevel++;
+                document.getElementById('currentLevel').textContent = currentLevel;
+            }
+
+            document.getElementById('clickSound').play();
+        }
+
+        function loadProfile() {
+            const userName = localStorage.getItem('userName');
+            const profilePic = localStorage.getItem('profilePic');
+
+            if (userName) {
+                document.getElementById('userName').textContent = userName;
+            }
+
+            if (profilePic) {
+                document.getElementById('profilePic').src = profilePic;
+            }
+        }
+
+        window.onload = loadProfile;
+    </script>
+</body>
+</html>
